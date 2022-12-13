@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <div id="container">
+        <!-- we have to append products here -->
+    </div>
+   
+</body>
+</html>
+<script>
+    function append(){
+        let data=JSON.parse(localStorage.getItem("products")) || []
+        container.innerHTML=null
+
+        data.forEach(function(element,index){
+            let div = document.createElement("div")
+            div.setAttribute("class", "product")
+        let image=document.createElement("img")
+        image.src=element.image
+        let name=document.createElement("p")
+        name.innerText=element.name
+        let catogery=document.createElement("p")
+        catogery.innerText=element.catogery
+        let price=document.createElement("p")
+        price.innerText=element.price
+        let gender=document.createElement("p")
+        gender.innerText=element.gender
+        let sold= document.createElement("button")
+        // sold.setAttribute("onclick",toggle())
+        sold.innerHTML=element.sold
+        sold.setAttribute("id", "sold")
+        sold.addEventListener("click",function(){
+            getValue()
+        }) 
+        let btn=document.createElement("button")
+        btn.setAttribute("id", "remove")
+        btn.innerText="Remove"
+        btn.addEventListener("click", function(){
+             remove(index)
+           
+        })
+        // console.log(image)
+        div.append(image,name,catogery,price,gender,sold,btn)
+        container.append(div)
+        });
+    }
+
+    append()
+
+   function remove(index){
+    console.log(index)
+     let data=JSON.parse(localStorage.getItem("products")) ||[]
+
+let newData=data.filter(function(el,i){
+ return i !==index
+})
+ localStorage.setItem("products",JSON.stringify(newData))
+ append()
+//  console.log(newData)
+}
+
+
+
+function getValue() {
+    console.log("inside")
+    let toggled=false;
+if(!toggled){
+    toggled=true;
+    let q= document.querySelector("#sold").innerHTML="true";
+    q.style.backgroundColor = "green";
+    return;
+    
+}
+if(toggled){
+    toggled=false;
+    document.querySelector("#sold").innerHTML="false";
+    return;
+}
+}
+    
+
+
+</script>

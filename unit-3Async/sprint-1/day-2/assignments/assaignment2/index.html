@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <button>
+        <a href="dashboard.html">dash board</a>
+    </button>
+    <h1>Add products</h1>
+    <form id="products">
+        <input type="img" id="image" placeholder="image url"><br>
+        <input type="text" id="name" placeholder="enter name of the product"><br>
+        <input type="text" id="catogery" placeholder="catogery"><br>
+        <input type="number" id="price" placeholder="Enter price"><br>
+        <input type="boolean" id="sold" value="false"><br>
+        <select name="gender" id="gender">
+            <option value="male">Male</option>
+            <option value="women">Women</option>
+        </select><br>
+        <input type="submit" id="add">
+    </form>
+</body>
+</html>
+<script>
+let productdata=document.querySelector("#products")
+productdata.addEventListener("submit",function(e){
+e.preventDefault()
+console.log("inside")
+let img=productdata.image.value
+let name=productdata.name.value
+let catogery=productdata.catogery.value
+let price=productdata.price.value
+let gender=productdata.gender.value
+let sold=productdata.sold.value
+let p1=new pro(img,name,catogery,price,gender,sold)
+
+let data=JSON.parse(localStorage.getItem("products")) || []
+data.push(p1)
+localStorage.setItem("products",JSON.stringify(data))
+// console.log(p1)
+})
+
+function pro(i,n,c,p,g,s){
+    this.image=i,
+    this.name=n,
+    this.catogery=c,
+    this.price=p,
+    this.gender=g,
+    this.sold=s
+    }
+</script>

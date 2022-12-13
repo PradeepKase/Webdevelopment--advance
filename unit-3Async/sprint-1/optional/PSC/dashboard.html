@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+            #navbar{
+        background-color: black;
+        color: white;
+        height: 40px;
+        text-align: center;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 10px;
+    }
+    #container{
+        display: grid;
+        grid-template-columns: repeat(4, 300px);
+        justify-content:space-evenly;
+    }
+
+    </style>
+</head>
+<body>
+    <div id="navbar">navbar</div>
+    <div id="container">
+
+    </div>
+</body>
+</html>
+<script>
+    function append(){
+        let data=JSON.parse(localStorage.getItem("students")) ||[]
+        container.innerHTML=null
+
+        data.forEach(function(el,index){
+         let div=document.createElement("div")
+         let img=document.createElement("img")
+         img.src=el.image
+         let names=document.createElement("p")
+         names.innerText=el.name
+         let course= document.createElement("p")
+         course.innerText=el.course
+         let batch=document.createElement("p")
+         batch.innerText=el.batch
+         let unit=document.createElement("p")
+         unit.innerText=el.unit
+         let btn=document.createElement("button")
+         btn.innerText="remove"
+         btn.addEventListener("click", function(){
+            remove(index)
+         })
+
+         div.append(img,names,course,batch,unit,btn)
+         container.append(div)
+        });
+
+    }
+    append()
+    
+    function remove(index){
+        // console.log(index)
+        let data=JSON.parse(localStorage.getItem("students")) ||[]
+
+        let newData=data.filter(function(el,i){
+            if(i===index){
+                let trash =JSON.parse(localStorage.getItem("trash"))|| []
+                trash.push(el)
+                localStorage.setItem("trash",JSON.stringify(trash))
+            }
+            else{
+                return i !==index
+            }
+
+         })
+
+         localStorage.setItem("students",JSON.stringify(newData))
+         append()
+        // console.log(newData)
+    }
+
+
+
+
+    function calucate(){
+        let data=JSON.parse(localStorage.getItem("students")) ||[]    
+        let obj={}
+        for(let i=0;i<data.length; i++){
+            if(!obj[data[i].batch]){
+                obj[data[i].batch]=0
+            }
+        } 
+
+        for(let i=0; i<data.length; i++){
+            obj[data[i].batch]++
+        }
+        console.log(obj)
+        let nav= document.querySelector("#navbar")
+        let navText = ''
+        for(let key in obj){
+            navText += `${key} = ${obj[key]} \n`
+            
+        }
+        nav.innerHTML= navText
+    }
+
+    calucate()
+</script>

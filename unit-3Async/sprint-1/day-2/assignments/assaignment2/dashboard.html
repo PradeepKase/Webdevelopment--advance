@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <div id="container">
+        <!-- we have to append products here -->
+    </div>
+   
+</body>
+</html>
+<script>
+    function append(){
+        let data=JSON.parse(localStorage.getItem("products")) || []
+        container.innerHTML=null
+
+        data.forEach(function(element,index){
+            let div = document.createElement("div")
+        let image=document.createElement("img")
+        image.src=element.image
+        let name=document.createElement("p")
+        name.innerText=element.name
+        let catogery=document.createElement("p")
+        catogery.innerText=element.catogery
+        let price=document.createElement("p")
+        price.innerText=element.price
+        let gender=document.createElement("p")
+        gender.innerText=element.gender
+        let sold= document.createElement("p")
+        sold.innerHTML=element.sold 
+        let btn=document.createElement("button")
+        btn.innerText="Remove"
+        btn.addEventListener("click", function(){
+             remove(index)
+           
+        })
+        // console.log(image)
+        div.append(image,name,catogery,price,gender,sold,btn)
+        container.append(div)
+        });
+    }
+
+    append()
+
+   function remove(index){
+    console.log(index)
+    let data=JSON.parse(localStorage.getItem("products")) ||[]
+
+let newData=data.filter(function(el,i){
+    if(i===index){
+        let trash =JSON.parse(localStorage.getItem("trash"))|| []
+        trash.push(el)
+        localStorage.setItem("trash",JSON.stringify(trash))
+    }
+    else{
+        return i !==index
+    }
+
+ })
+
+ localStorage.setItem("students",JSON.stringify(newData))
+ append()
+//  console.log(newData)
+}
+
+    
+
+
+</script>

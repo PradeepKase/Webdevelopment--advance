@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .wrapper{
+            display: flex;
+            justify-content: center;
+        }
+        #winner{
+            border:1px solid black;
+            width: 400px;
+            height: 100px;
+            display: flex;
+            justify-content: center;
+            font-size: 50px;
+            align-items: center;
+        }
+        #member-1{
+            border:1px solid red;
+            width: 100px;
+            height: 100px;
+            font-size: 90px;
+            text-align: center;
+        }
+        #member-2{
+            border:1px solid green;
+            width: 100px;
+            height: 100px;
+            font-size: 90px;
+            text-align: center;
+        }
+        #member-3{
+            border:1px solid yellow;
+            width: 100px;
+            height: 100px;
+            font-size: 90px;
+            text-align: center;
+        }
+        .pp{
+            border:1px solid black;
+            width: 100%;
+            display: flex;
+            /* justify-content: center; */
+            margin-top: 50px;
+            justify-content: space-evenly;
+            
+        }
+        .btn{
+            display: flex;
+            justify-content: center;
+            margin: 20px;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="wrapper">
+        <div id="winner">
+             
+        </div>
+    </div>
+        <div class="pp">
+            <div id="member-1"></div>
+            <div id="member-2"></div>
+            <div id="member-3"></div> 
+        </div>
+        <div class="btn">
+            <button id="roll">ROLL THE DICE</button>
+        </div>
+</body>
+</html>
+<script>
+    let fRn=Math.floor(Math.random()*6)+1
+    let sRn=Math.floor(Math.random()*6)+1
+    let tRn=Math.floor(Math.random()*6)+1
+
+    let clicked =document.querySelector("#roll")
+    clicked.addEventListener("click", function(){
+        // console.log("inside")
+        document.querySelector("#member-1").innerText=fRn
+        document.querySelector("#member-2").innerText=sRn
+        document.querySelector("#member-3").innerText=tRn
+
+        if(fRn>sRn  && fRn>tRn){
+        document.querySelector("#winner").innerText="Member A wins"
+        document.querySelector("#member-1").style.backgroundColor = "green";
+    }
+    else if(sRn>fRn&& sRn>tRn){
+        document.querySelector("#winner").innerText="Member B wins"
+        document.querySelector("#member-2").style.backgroundColor = "green";
+    }
+    else if(tRn>fRn && tRn>sRn){
+        document.querySelector("#winner").innerText="Member C wins"
+        document.querySelector("#member-3").style.backgroundColor = "green";
+    }
+    else{
+        document.querySelector("#winner").innerText="Draw"
+        document.querySelector("#member-1").style.backgroundColor = "blue";
+        document.querySelector("#member-2").style.backgroundColor = "blue";
+        document.querySelector("#member-3").style.backgroundColor = "blue";
+    }
+    if(fRn==sRn || fRn==tRn || sRn==fRn|| sRn==tRn || tRn==fRn || tRn==sRn){
+        alert("two members having same number hense play again")
+    }
+    // tuuiyuiyuuiuyguyguhuihuiyuoiu99
+    if(fRn<sRn && fRn>tRn){
+        document.querySelector("#member-1").style.backgroundColor = "yellow";  
+    }
+    else if(fRn<sRn && fRn<tRn){
+        document.querySelector("#member-1").style.backgroundColor = "red";
+    }
+    if(sRn<fRn && sRn>tRn){
+        document.querySelector("#member-2").style.backgroundColor = "yellow";  
+    }
+    else if(sRn<fRn && sRn<tRn){
+        document.querySelector("#member-2").style.backgroundColor = "red";
+    }
+    if(tRn<fRn && tRn>sRn){
+        document.querySelector("#member-3").style.backgroundColor = "yellow";  
+    }
+    else if(tRn<fRn && tRn<sRn){
+        document.querySelector("#member-3").style.backgroundColor = "red";
+    }
+    })
+
+</script>

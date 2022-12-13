@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div>the answer is in console so inspect and go to console</div>
+</body>
+</html>
+<script>
+    let akbar={
+        name:"akbar"
+    }
+    let anthony={
+        name:"Anthony"
+    }
+    let amar={
+        name:"Amar"
+    }
+    let impressPeople={
+        name:"event",
+        showskills:function (skills){
+            console.log(`Amar borrowing ${skills} from ${this.name}`)
+            console.log(`Akbar borrowing ${skills} from ${this.name}`)
+            console.log(`Anthony borrowing ${skills} from ${this.name}`)
+        }
+    }
+
+    impressPeople.showskills.call(akbar,'skills')
+    impressPeople.showskills.call(anthony,'skills')
+    impressPeople.showskills.call(amar,'skills')
+   
+
+
+</script>

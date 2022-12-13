@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+<style>
+    #navbar{
+        background-color: black;
+        color: white;
+        height: 40px;
+        text-align: center;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 10px;
+    }
+    button{
+        display: flex;
+    /* justify-content: center; */
+    margin: auto;
+    text-decoration: none;
+    background-color: #bfbff1;
+    color: white;
+    }
+    h1{
+        text-align: center;
+    }
+    form{
+        display: block;
+        justify-content: center;
+        margin: auto;
+        margin-left: 582px;
+    }
+    input{
+        margin-bottom: 10px;
+    }
+    input:last-child{
+        margin-left: 57px;
+    }
+
+</style>
+</head>
+<body>
+    <div id="navbar">
+        navbar
+    </div>
+    <button>
+        <a href="dashboard.html"> Dash Board</a>
+    </button>
+    <h1>Add student data</h1>
+    <form id="student-data" >
+        <input type="text" id="name" placeholder="name"><br>
+        <input type="text" id="course" placeholder="course"><br>
+        <input type="number" id="unit" placeholder="unit"><br>
+        <input type="text" id="image" placeholder="image"><br>
+        <input type="number" id="batch" placeholder="batch number"><br>
+        <input type="submit">
+    </form>
+</body>
+</html>
+<script>
+    let studentdata=document.querySelector("#student-data")
+    studentdata.addEventListener("submit", function(e){
+        e.preventDefault()
+        let name=studentdata.name.value
+        let course=studentdata.course.value
+        let unit=studentdata.unit.value
+        let image=studentdata.image.value
+        let batch=studentdata.batch.value
+       let s1= new student(name,course,unit,image,batch)
+        // console.log(s1)
+        let data=JSON.parse(localStorage.getItem("students")) ||[]
+        data.push(s1)
+        localStorage.setItem("students",JSON.stringify(data))
+    })
+
+     function student(n,c,u,i,b){
+        this.name=n,
+        this.course=c,
+        this.unit=u,
+        this.image=i,
+        this.batch=`FT-web-${b}`
+     }
+    //  calucate stdents in batches
+
+    function calucate(){
+        let data=JSON.parse(localStorage.getItem("students")) ||[]    
+        let obj={}
+        for(let i=0;i<data.length; i++){
+            if(!obj[data[i].batch]){
+                obj[data[i].batch]=0
+            }
+        } 
+
+        for(let i=0; i<data.length; i++){
+            obj[data[i].batch]++
+        }
+        console.log(obj)
+        let nav= document.querySelector("#navbar")
+        let navText = ""
+        for(let key in obj){
+            navText += `${key} = ${obj[key]} \n`
+            
+        }
+        nav.innerHTML= navText
+    }
+
+    calucate()
+</script>

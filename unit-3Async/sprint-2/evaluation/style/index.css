@@ -1,0 +1,27 @@
+#navbar{
+    background-color: aqua;
+    display: flex;
+
+  }
+  #navbar>div{
+    display: flex;
+    margin: auto;
+  }
+  #navbar>div>p{
+    background-color: aquamarine;
+    margin-right: 20px;
+  }
+  #cart{
+    height: 33px;
+    margin-top: 8px;
+  }
+  #menu{
+    display: grid;
+    grid-template-columns: repeat(4,1fr);
+    gap: 20px;
+    
+  }
+  #menu>div>img{
+    height: 200px;
+    width: 250px;
+  }
